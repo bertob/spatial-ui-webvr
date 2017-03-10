@@ -7,8 +7,8 @@ var x_offset = 0;
 var y_offset = 1.4; // 1m from the floor
 var z_offset = -0.6; // 40cm before viewer
 
-var el_h = 0.032;
-var el_w = 0.1;
+var el_h = 0.032*3;
+var el_w = 0.1*3;
 var el_d = 0.002;
 
 var z_gap = 0.002;
@@ -42,12 +42,17 @@ for (var i=0; i<list_items; i++) {
     z = z_offset;
   }
 
-  // var el = document.createElement('a-box');
-  // el.setAttribute('position', x + " " + y + " " + z);
-  // el.setAttribute('scale', el_w + " " + el_h + " " + el_d);
-  // el.setAttribute('color', '#fff');
-  // el.setAttribute('src', 'card.png');
-  // document.getElementById("scene").appendChild(el);
+  var el = document.createElement('a-box');
+  el.setAttribute('position', x + " " + y + " " + z);
+  el.setAttribute('height', el_h);
+  el.setAttribute('width', el_w);
+  el.setAttribute('depth', el_d);
+  el.setAttribute('color', '#fff');
+  // el.setAttribute('hoverable', '');
+  el.setAttribute('grabbable', '');
+  // el.setAttribute('drag-droppable', '');
+  el.setAttribute('src', 'assets/card.png');
+  document.getElementById("scene").appendChild(el);
 }
 
 
@@ -68,23 +73,25 @@ for (var i=0; i<path.length; i++) {
   path_str += " " + path[i].toString();
 }
 
-for (var i=0; i<130; i++) {
-  var el = document.createElement('a-box');
-  el.setAttribute('position', path[0][0] + " " + path[0][1] + " " + path[0][2]);
-  el.setAttribute('scale', el_w + " " + el_h + " " + el_d);
-  el.setAttribute('color', '#fff');
-  el.setAttribute('src', 'assets/card.png');
-  el.setAttribute("alongpath", "path:" + path_str + "; closed:true; loop:true; dur:30000; delay:" + i*100 + "; inspect:false;");
-
-  var avatar = document.createElement('a-circle');
-  avatar.setAttribute('radius', 1);
-  var id = Math.floor(Math.random()*12) + 1;
-  avatar.setAttribute('src', 'assets/' + id + '.jpg');
-  avatar.setAttribute('color', '#fff');
-  avatar.setAttribute("scale", {x: 0.01/el_w, y: 0.01/el_h});
-  avatar.setAttribute("position", {x: -0.0345/el_w, y: 0, z: 1.001});
-  avatar.setAttribute("material", "side:double");
-
-  el.appendChild(avatar);
-  document.getElementById("scene").appendChild(el);
-}
+// for (var i=0; i<130; i++) {
+//   var el = document.createElement('a-box');
+//   el.setAttribute('position', path[0][0] + " " + path[0][1] + " " + path[0][2]);
+  // el.setAttribute('height', el_h);
+  // el.setAttribute('width', el_w);
+  // el.setAttribute('depth', el_d);
+//   el.setAttribute('color', '#fff');
+//   el.setAttribute('src', 'assets/card.png');
+//   el.setAttribute("alongpath", "path:" + path_str + "; closed:true; loop:true; dur:30000; delay:" + i*100 + "; inspect:false;");
+//
+//   var avatar = document.createElement('a-circle');
+//   avatar.setAttribute('radius', 1);
+//   var id = Math.floor(Math.random()*12) + 1;
+//   avatar.setAttribute('src', 'assets/' + id + '.jpg');
+//   avatar.setAttribute('color', '#fff');
+//   avatar.setAttribute("scale", {x: 0.01/el_w, y: 0.01/el_h});
+//   avatar.setAttribute("position", {x: -0.0345/el_w, y: 0, z: 1.001});
+//   avatar.setAttribute("material", "side:double");
+//
+//   el.appendChild(avatar);
+//   document.getElementById("scene").appendChild(el);
+// }
