@@ -41,18 +41,18 @@ for (var i=0; i<list_items; i++) {
     y = y_offset + real_position * (el_h + y_gap);
     z = z_offset;
   }
-
-  var el = document.createElement('a-box');
-  el.setAttribute('position', x + " " + y + " " + z);
-  el.setAttribute('height', el_h);
-  el.setAttribute('width', el_w);
-  el.setAttribute('depth', el_d);
-  el.setAttribute('color', '#fff');
-  // el.setAttribute('hoverable', '');
-  el.setAttribute('grabbable', '');
-  // el.setAttribute('drag-droppable', '');
-  el.setAttribute('src', 'assets/card.png');
-  document.getElementById("scene").appendChild(el);
+  //
+  // var el = document.createElement('a-box');
+  // el.setAttribute('position', x + " " + y + " " + z);
+  // el.setAttribute('height', el_h);
+  // el.setAttribute('width', el_w);
+  // el.setAttribute('depth', el_d);
+  // el.setAttribute('color', '#fff');
+  // // el.setAttribute('hoverable', '');
+  // el.setAttribute('grabbable', '');
+  // // el.setAttribute('drag-droppable', '');
+  // el.setAttribute('src', 'assets/card.png');
+  // document.getElementById("scene").appendChild(el);
 }
 
 
