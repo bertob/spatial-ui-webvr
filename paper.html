@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Aframe Experiment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="style.css" rel="stylesheet" type="text/css" />
+
+  <script src='lib/jquery.min.js'></script>
+  <script src='lib/aframe.min.js'></script>
+  <script src='lib/aframe-physics-system.min.js'></script>
+  <script src='lib/aframe-alongpath-component.min.js'></script>
+  <script src='lib/aframe-extras.min.js'></script>
+  <script src='lib/super-hands.min.js'></script>
+  <script src='lib/aframe-text-geometry-component.min.js'></script>
+  <script src='lib/aframe-teleport-controls.min.js'></script>
+  <script>
+    AFRAME.registerComponent('controller-loaded', {
+      init: function() {
+        this.el.addEventListener('model-loaded', function() {
+          this.addState('loaded');
+        });
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <a-scene id="scene" physics="gravity: 0;">
+
+    <a-assets>
+      <a-mixin id="controller" super-hands
+                 controller-loaded
+                 sphere-collider="objects: .card; radius: 0.005"></a-mixin>
+        <a-mixin id="controller-loaded" static-body="shape: sphere; sphereRadius: 0.02;"></a-mixin>
+        <a-mixin id="card" color="white" hoverable grabbable dynamic-body angularDamping="0.5"></a-mixin>
+        <a-mixin id="card-hovered" material="opacity: 0.7; transparent: true"></a-mixin>
+    </a-assets>
+
+    <a-entity hand-controls="left" mixin="controller"></a-entity>
+    <a-entity hand-controls="right" mixin="controller"></a-entity>
+    <!-- <a-entity teleport-controls collisionEntities="" hitEntity="" vive-controls="hand: left"></a-entity> -->
+
+    <a-sky color="#bed"></a-sky>
+
+    <!--  floor -->
+    <a-plane rotation="-90 0 0" width="3" height="3" position="0 0.005 0" repeat="10 10" color="red"></a-plane>
+    <a-plane static-body rotation="-90 0 0" width="10" height="10" repeat="10 10" color="#999f99"></a-plane>
+
+    <!--  ceiling -->
+    <!-- <a-plane rotation="-270 0 0" width="10" height="10" position="0 3 0" repeat="10 10" color="#999f99"></a-plane> -->
+
+    <!--  walls -->
+    <!-- <a-box rotation="0 0 0" scale="10 100 0.1" position="0 0 -5" repeat="10 10" color="#bed"></a-box>
+    <a-box rotation="0 90 0" scale="10 100 0.1" position="5 0 0" repeat="10 10" color="#bed"></a-box>
+    <a-box rotation="0 90 0" scale="10 100 0.1" position="-5 0 0" repeat="10 10" color="#bed"></a-box> -->
+
+    <!-- pages -->
+    <a-entity rotation="0 90 0" position="-1.5 2.05 1.3" text-geometry="value: A Framework for Analyzing Feedforward; size: 0.08; height: 0.001;" material="color: black"></a-entity>
+    <a-entity rotation="0 90 0" position="-1.5 1.92 1.3" text-geometry="value: and Feedback in User Interfaces; size: 0.08; height: 0.001;" material="color: black"></a-entity>
+    <!-- abstract -->
+    <a-entity rotation="0 90 0" position="-1.5 1.75 1.3" text-geometry="value: Abstract; size: 0.05; height: 0.001;" material="color: black"></a-entity>
+    <a-box class="card" rotation="0 90 0" width="0.62" height="0.43" depth="0.005" position="-1.5 1.5 1" mixin="card" src="pages/abstract.png"></a-box>
+
+    <!-- introduction -->
+    <a-entity rotation="0 90 0" position="-1.5 1.75 0.5" text-geometry="value: Introduction; size: 0.05; height: 0.001;" material="color: black"></a-entity>
+    <a-box id="intro1" class="card" rotation="0 90 0" width="0.62" height="0.41" depth="0.005" position="-1.5 1.51.5 0.2" mixin="card" src="pages/i1.png"></a-box>
+    <a-box id="intro2" constraint="target: #intro1; type:distance;" class="card" rotation="0 90 0" width="0.62" height="0.53" depth="0.005" position="-1.5 1.02 0.2" mixin="card" src="pages/i2.png"></a-box>
+    <!-- <a-box id="intro3" constraint="target: #intro2; type:distance;" class="card" class="card" rotation="0 90 0" width="0.62" height="0.62" depth="0.005" scale="0.8 0.8 1" position="-1.53 0.95 0.2" mixin="card" src="pages/i3.png"></a-box> -->
+    <a-box class="card" rotation="0 90 0" width="0.62" height="0.41" depth="0.005" scale="0.6 0.6 1" position="-1.56 0.78 0.2" mixin="card" src="pages/i4.png"></a-box>
+    <a-box class="card" rotation="0 90 0" width="0.62" height="0.57" depth="0.005" scale="0.4 0.4 1" position="-1.59 0.74 0.2" mixin="card" src="pages/i5.png"></a-box>
+
+    <!-- related work -->
+    <a-entity rotation="0 90 0" position="-1.5 1.75 -0.3" text-geometry="value: Related Work; size: 0.05; height: 0.001;" material="color: black"></a-entity>
+    <a-box class="card"rotation="0 90 0" width="0.62" height="0.69" depth="0.005" position="-1.5 1.37 -0.6" mixin="card" src="pages/r1.png"></a-box>
+
+    <!-- framework -->
+    <a-box class="card" rotation="0 0 0" width="1.92" height="1.16" depth="0.005" position="0.3 1.36 -1.5" mixin="card" src="pages/framework.png"></a-box>
+    <a-box class="card" rotation="0 0 0" width="0.62" height="0.58" depth="0.005" position="-0.8 0.8 -1.45" mixin="card" src="pages/legend.png"></a-box>
+
+    <!-- table -->
+    <!-- <a-box scale="1.5 1 0.8" position="0 0.5 -1.1" color="brown"></a-box> -->
+
+    <!-- person -->
+    <!-- <a-box scale="0.1 1.6 0.1" position="0 0.8 0" color="yellow"></a-box> -->
+
+    <!-- lights -->
+    <a-light type="hemisphere" color="#dff" intensity="0.9" position="0 0.2 0" target="null"></a-light>
+  </a-scene>
+
+</body>
+</html>

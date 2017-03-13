@@ -1,6 +1,6 @@
 
 var list_items = 58;
-var visible_items = 12;
+var visible_items = 8;
 var scroll_position = 14; // 0...(10-4)
 
 var x_offset = 0;
@@ -41,37 +41,39 @@ for (var i=0; i<list_items; i++) {
     y = y_offset + real_position * (el_h + y_gap);
     z = z_offset;
   }
-  //
-  // var el = document.createElement('a-box');
-  // el.setAttribute('position', x + " " + y + " " + z);
-  // el.setAttribute('height', el_h);
-  // el.setAttribute('width', el_w);
-  // el.setAttribute('depth', el_d);
-  // el.setAttribute('color', '#fff');
-  // // el.setAttribute('hoverable', '');
-  // el.setAttribute('grabbable', '');
-  // // el.setAttribute('drag-droppable', '');
-  // el.setAttribute('src', 'assets/card.png');
-  // document.getElementById("scene").appendChild(el);
+
+  var el = document.createElement('a-box');
+  el.setAttribute('id', 'card' + i);
+  el.setAttribute('class', 'card');
+  el.setAttribute('mixin', 'card');
+  el.setAttribute('position', x + " " + y + " " + z);
+  el.setAttribute('height', el_h);
+  el.setAttribute('width', el_w);
+  el.setAttribute('depth', el_d);
+  el.setAttribute('color', '#fff');
+  // if (i>0)
+    // el.setAttribute('constraint', 'target:' + ('#card' + (i-1)) + '; type: distance; distance: 0.2');
+  el.setAttribute('src', 'assets/card.png');
+  document.getElementById("scene").appendChild(el);
 }
 
 
 // Move items along path
 
-var curve_top = [];
-var curve_bottom = [];
-
-for (var i=0; i<12; i++) {
-  var v = Math.pow(i, 1/6) * 0.3;
-  curve_top.push([0, top_baseline + v, z_offset - i*0.02]);
-  curve_bottom.unshift([0, bottom_baseline - v, z_offset - i*0.02]);
-}
-
-var path = curve_bottom.concat(curve_top);
-var path_str = "";
-for (var i=0; i<path.length; i++) {
-  path_str += " " + path[i].toString();
-}
+// var curve_top = [];
+// var curve_bottom = [];
+//
+// for (var i=0; i<12; i++) {
+//   var v = Math.pow(i, 1/6) * 0.3;
+//   curve_top.push([0, top_baseline + v, z_offset - i*0.02]);
+//   curve_bottom.unshift([0, bottom_baseline - v, z_offset - i*0.02]);
+// }
+//
+// var path = curve_bottom.concat(curve_top);
+// var path_str = "";
+// for (var i=0; i<path.length; i++) {
+//   path_str += " " + path[i].toString();
+// }
 
 // for (var i=0; i<130; i++) {
 //   var el = document.createElement('a-box');
