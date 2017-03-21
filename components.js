@@ -34,23 +34,27 @@ AFRAME.registerComponent("card", {
 
     var real_position = this.data.list_position - scroll_position;
 
-    if (real_position < 0) {
-      // stacked on bottom
-      offset = Math.abs(real_position);
-      y = bottom_baseline - Math.log(offset + 1)*0.03;
-      z = z_offset - (offset * (card_d + z_gap));
-    }
-    else if (real_position > (visible_items - 1)) {
-      // stacked on top
-      offset = real_position - visible_items + 1;
-      y = top_baseline + Math.log(offset + 1)*0.03;
-      z = z_offset - (offset * (card_d + z_gap));
-    }
-    else {
-      // visible in list
-      y = y_offset + real_position * (card_h + y_gap);
-      z = z_offset;
-    }
+    y = y_offset + real_position * (card_h + y_gap);
+    z = z_offset;
+
+    //
+    // if (real_position < 0) {
+    //   // stacked on bottom
+    //   offset = Math.abs(real_position);
+    //   y = bottom_baseline - Math.log(offset + 1)*0.03;
+    //   z = z_offset - (offset * (card_d + z_gap));
+    // }
+    // else if (real_position > (visible_items - 1)) {
+    //   // stacked on top
+    //   offset = real_position - visible_items + 1;
+    //   y = top_baseline + Math.log(offset + 1)*0.03;
+    //   z = z_offset - (offset * (card_d + z_gap));
+    // }
+    // else {
+    //   // visible in list
+    //   y = y_offset + real_position * (card_h + y_gap);
+    //   z = z_offset;
+    // }
 
     this.el.setAttribute("geometry", "primitive: box; width:" + card_w +
                          "; height:" + card_h + "; depth: " + card_d + ";");
@@ -86,7 +90,6 @@ AFRAME.registerComponent("card", {
         now.relDeltaY = now.cursorY - prev.cursorY;
         now.absDeltaY = prev.absDeltaY + now.relDeltaY;
         now.cardY = start.cardY + now.absDeltaY;
-        console.log(now.relDeltaY, prev.absDeltaY, now.absDeltaY);
 
         if (now.relDeltaY !== 0) {
           var x, y, z;
@@ -96,16 +99,16 @@ AFRAME.registerComponent("card", {
           if (new_y < bottom_baseline) {
             // stacked on bottom
             var y_below = bottom_baseline - new_y; // how far below the baseline y
-            y = bottom_baseline - Math.log(y_below*10 + 1)*0.03;
-            z = z_offset - y_below;//(y_below*10 * (card_d + z_gap));
+            y = bottom_baseline - Math.sqrt(y_below/20);
+            z = z_offset - y_below/5;
             console.log("stacked below", y_below);
           }
           else if (new_y > top_baseline) {
             // stacked on top
             var y_above = new_y - top_baseline; // how far above the baseline y
             console.log("stacked above", y_above);
-            y = top_baseline + Math.log(y_above*10 + 1)*0.03;
-            z = z_offset - y_above;//(y_above*10 * (card_d + z_gap));
+            y = top_baseline + Math.sqrt(y_above/20);
+            z = z_offset - y_above/5;
           }
           else {
             // visible in list
@@ -116,8 +119,7 @@ AFRAME.registerComponent("card", {
 
           this.el.setAttribute("position", new THREE.Vector3( x, y, z ));
 
-          this.prev.position = [x, y, z];
-          // console.log(this.prevData);
+          this.prev.position = [x, new_y, z];
           this.prev.absDeltaY = now.absDeltaY;
           this.prev.cursorY = now.cursorY;
         }
