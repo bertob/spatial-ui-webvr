@@ -1,5 +1,5 @@
 var list_length = 12;
-var visible_items = 4;
+var visible_items = 6;
 var scroll_position = 0; // 0...(list_length - visible_items)
 
 var x_offset = 0;
@@ -88,7 +88,7 @@ AFRAME.registerComponent("card", {
       else {
         console.log("moving");
         now.relDeltaY = now.cursorY - prev.cursorY;
-        now.absDeltaY = prev.absDeltaY + now.relDeltaY;
+        now.absDeltaY = prev.absDeltaY + now.relDeltaY * 3;
         now.cardY = start.cardY + now.absDeltaY;
 
         if (now.relDeltaY !== 0) {
@@ -99,7 +99,7 @@ AFRAME.registerComponent("card", {
           if (new_y < bottom_baseline) {
             // stacked on bottom
             var y_below = bottom_baseline - new_y; // how far below the baseline y
-            y = bottom_baseline - Math.sqrt(y_below/20);
+            y = bottom_baseline - getCardDepth(y_below);
             z = z_offset - y_below/5;
             console.log("stacked below", y_below);
           }
@@ -107,7 +107,7 @@ AFRAME.registerComponent("card", {
             // stacked on top
             var y_above = new_y - top_baseline; // how far above the baseline y
             console.log("stacked above", y_above);
-            y = top_baseline + Math.sqrt(y_above/20);
+            y = top_baseline + getCardDepth(y_above);
             z = z_offset - y_above/5;
           }
           else {
@@ -137,3 +137,9 @@ AFRAME.registerComponent("card", {
   pause: function () {},
   play: function () {}
 });
+
+// returns z position as a function of how far
+// outside the visible area the card is
+function getCardDepth(y) {
+  return Math.sqrt(y/20);
+}
