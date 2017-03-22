@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Aframe Experiment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="style.css" rel="stylesheet" type="text/css" />
+
+  <script src='lib/jquery.min.js'></script>
+  <script src='lib/aframe.min.js'></script>
+  <script src='lib/aframe-extras.min.js'></script>
+  <!-- <script src='lib/aframe-physics-system.min.js'></script> -->
+  <!-- <script src='lib/super-hands.min.js'></script> -->
+  <!-- <script src='lib/aframe-auto-detect-controllers-component.min.js'></script> -->
+  <!-- <script src='lib/aframe-alongpath-component.min.js'></script>
+  <script src='lib/aframe-text-geometry-component.min.js'></script> -->
+  <!-- <script src='lib/aframe-teleport-controls.min.js'></script> -->
+  <script src="components.js"></script>
+  <script>
+  </script>
+</head>
+
+<body>
+  <a-scene id="scene">
+
+    <!-- <a-entity vive-controls="hand: left"></a-entity> -->
+    <a-entity id="right-hand" vive-controls="hand: right"></a-entity>
+    <!-- <a-entity id="lefthand" auto-detect-controllers="hand:left"></a-entity>
+    <a-entity id="righthand" auto-detect-controllers="hand:right"></a-entity> -->
+
+    <a-sky color="#bed"></a-sky>
+
+    <!--  floor -->
+    <a-plane rotation="-90 0 0" width="3" height="3" position="0 0.005 0" repeat="10 10" color="red"></a-plane>
+    <a-plane rotation="-90 0 0" width="10" height="10" repeat="10 10" color="#999f99"></a-plane>
+
+
+    <a-box id="hello" width="0.62" height="0.43" depth="0.5" position="0 1.5 -1" color="red"></a-box>
+
+    <!-- lights -->
+    <a-light type="hemisphere" color="#dff" intensity="0.9" position="0 0.2 0" target="null"></a-light>
+  </a-scene>
+
+  <script src="script.js"></script>
+  <script>
+    // document.getElementById("ctrl").addEventListener("triggerdown", function() {
+    //   console.log('UUUUAAAAAUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU');
+    // });
+  </script>
+</body>
+</html>
