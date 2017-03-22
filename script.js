@@ -29,7 +29,7 @@ for (var i=0; i<40; i++) {
     var str = h + "h ago";
 
     var timestamp = document.createElement("a-entity");
-    timestamp.setAttribute("position", {x: 0.2, y: -0.04, z: 0.0015});
+    timestamp.setAttribute("position", {x: 0.16, y: -0.04, z: 0.0015});
     timestamp.setAttribute("text-geometry", "value: " + str + "; size: 0.02; height: 0.001;");
     timestamp.setAttribute("material", "color: #333");
 

@@ -58,7 +58,7 @@ AFRAME.registerComponent("card", {
 
     this.el.setAttribute("geometry", "primitive: box; width:" + card_w +
                          "; height:" + card_h + "; depth: " + card_d + ";");
-    this.el.setAttribute("material", "color: white; src: url(assets/card.png);");
+    this.el.setAttribute("material", "color: white; src: #email-card;");
     this.el.setAttribute("position", new THREE.Vector3( x, y, z ));
     this.prev.position = [x, y, z];
   },
