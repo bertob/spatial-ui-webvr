@@ -22,7 +22,7 @@ AFRAME.registerComponent("card", {
     list_position: {type: "int"},
   },
   init: function () {
-    console.log("INIT");
+    // console.log("INIT");
     this.start = {};
     this.prev = {};
     this.moving = false;
@@ -37,7 +37,7 @@ AFRAME.registerComponent("card", {
     var id = Math.floor(Math.random()*6) + 1;
     this.el.setAttribute("geometry", "primitive: box; width:" + card_w +
                          "; height:" + card_h + "; depth: " + card_d + ";");
-    this.el.setAttribute("material", "color: white; src: #img" + id);
+    this.el.setAttribute("material", "color: white; opacity: 0; src: #img" + id);
     this.el.setAttribute("position", new THREE.Vector3( x, y, z ));
     this.prev.position = [x, y, z];
   },
@@ -48,12 +48,12 @@ AFRAME.registerComponent("card", {
     var prev = this.prev;
 
     if (triggerdown) {
-      console.log("TICK + TRIGGERDOWN");
+      // console.log("TICK + TRIGGERDOWN");
       now.cursorPosition = document.getElementById("right-hand").components.position.attrValue;
       now.cursorY = now.cursorPosition.y;
 
       if (!this.moving) {
-        console.log("start");
+        // console.log("start");
         start.cursorY = now.cursorY;
         start.cardY = prev.position[1];
         start.position = prev.position;
@@ -65,7 +65,7 @@ AFRAME.registerComponent("card", {
         this.moving = true;
       }
       else {
-        console.log("moving");
+        // console.log("moving");
         now.relDeltaY = now.cursorY - prev.cursorY;
         now.absDeltaY = prev.absDeltaY + now.relDeltaY * 3;
         now.cardY = start.cardY + now.absDeltaY;

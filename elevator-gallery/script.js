@@ -22,63 +22,65 @@ for (var i=0; i<list_length; i++) {
   document.getElementById("scene").appendChild(card);
 }
 
-// YEAR OVERVIEW GRID
-var yrs = {};
-yrs.x = -0.9;
-yrs.y = 1.8;
-yrs.z = -1.7;
-yrs.row_gap = 0.04;
-yrs.column_gap = 0.03;
-yrs.stack_gap = 0.005;
-yrs.card_w = 0.1;
-yrs.card_h = yrs.card_w * 3/4;
-yrs.card_d = 0.003;
+// RING OF ITEMS
+var ring = {};
+ring.x = 0;
+ring.y = 1;
+ring.z = 0;
+ring.radius = 1.4;
 
-var decades = [1910, 1920, 1930, 1940, 1950, 1960];
+ring.row_gap = 0.04;
+// ring.column_gap = 0.03;
+ring.angular_gap = 7.5; // degrees rotation
 
-for (var i=0; i<decades.length; i++) {
+ring.card_w = 0.15;
+ring.card_h = ring.card_w * 3/4;
+ring.card_d = 0.003;
+ring.title_h = 0.2;
 
-  var overview_container = document.createElement("a-entity");
-  overview_container.setAttribute("rotation", {y: 80});
+ring.rows = 58;
 
-  var decade_title = document.createElement("a-entity");
-  decade_title.setAttribute("position", {x: yrs.x - (yrs.card_w/2) - 0.08,
-                                         y: yrs.y - (yrs.row_gap + yrs.card_h) * i + 0.01,
-                                         z: yrs.z});
-  decade_title.setAttribute("text-geometry", "value: " + decades[i] + "; size: 0.02; height: 0.001;");
-  decade_title.setAttribute("material", "color: #fff");
+var ring_container = document.createElement("a-entity");
+var extra_y_space = 0;
 
-  overview_container.appendChild(decade_title);
+for (var i=0; i<ring.rows; i++) {
 
-  // years in the decade
-  for (var j=0; j<10; j++) {
+  if (i%6 === 0) {
+    var month_title = document.createElement("a-entity");
+    extra_y_space += ring.title_h;
+    month_title.setAttribute("position", {x: ring.x  + Math.cos(-90*Math.PI/180) * ring.radius - 0.13,
+                                          y: ring.y - (ring.row_gap + ring.card_h) * i - extra_y_space + 0.1,
+                                          z: ring.z + Math.sin(-90*Math.PI/180) * ring.radius});
+    month_title.setAttribute("text-geometry", "value: " + (2000+i/6) + "; size: 0.08; height: 0.001;");
+    month_title.setAttribute("rotation", {y: 0});
+    month_title.setAttribute("material", "color: #fff");
 
-    // stack of elements for one year
-    var no_items = Math.floor(Math.random()*15) + 2;
-    if (i===0 && j<3) no_items = 0;
-    if (i===(decades.length-1) && j>6) no_items = 0;
-    for (var k=0; k<no_items; k++) {
+    ring_container.appendChild(month_title);
+  }
 
-      var id = Math.floor(Math.random()*6) + 1;
-      var item = document.createElement("a-entity");
-      item.setAttribute("geometry", "primitive: box; width:" + yrs.card_w +
-                           "; height:" + yrs.card_h + "; depth: " + yrs.card_d + ";");
-      item.setAttribute("material", "color: white; src: #img" + id);
-      item.setAttribute("position", {x: yrs.x + (yrs.column_gap + yrs.card_w) * j,
-                                     y: yrs.y - (yrs.row_gap + yrs.card_h) * i,
-                                     z: yrs.z - (yrs.stack_gap + yrs.card_d) * k});
-      overview_container.appendChild(item);
-    }
+  // item every n degrees along the circle
+  for (var a=0; a<360; a+=ring.angular_gap) {
+    var id = Math.floor(Math.random()*6) + 1;
+    var item = document.createElement("a-entity");
+    item.setAttribute("geometry", "primitive: box; width:" + ring.card_w +
+                         "; height:" + ring.card_h + "; depth: " + ring.card_d + ";");
+    // item.setAttribute("geometry", "primitive: sphere; radius:" + ring.card_w);
+    item.setAttribute("rotation", {y: 90 - a});
+    item.setAttribute("material", "color: white; src: #img" + id);
+    item.setAttribute("position", {x: ring.x + Math.cos(a*Math.PI/180) * ring.radius,
+                                   y: ring.y - (ring.row_gap + ring.card_h) * i - extra_y_space,
+                                   z: ring.z + Math.sin(a*Math.PI/180) * ring.radius});
+    ring_container.appendChild(item);
 
   }
-  document.getElementById("elevatable").appendChild(overview_container);
+  document.getElementById("elevatable").appendChild(ring_container);
 }
 
 // DETAIL VIEW
-var detail = document.createElement("a-entity");
-detail.setAttribute("geometry", "primitive: box; width:" + yrs.card_w*12 +
-"; height:" + yrs.card_h*12 + "; depth: " + yrs.card_d + ";");
-detail.setAttribute("material", "color: white; src: #img" + id);
-detail.setAttribute("rotation", {y: -40});
-detail.setAttribute("position", {x: 0.8, y: 1.6, z: -0.2});
+// var detail = document.createElement("a-entity");
+// detail.setAttribute("geometry", "primitive: box; width:" + yrs.card_w*12 +
+// "; height:" + yrs.card_h*12 + "; depth: " + yrs.card_d + ";");
+// detail.setAttribute("material", "color: white; src: #img" + id);
+// detail.setAttribute("rotation", {y: -40});
+// detail.setAttribute("position", {x: 0.8, y: 1.6, z: -0.2});
 // document.getElementById("scene").appendChild(detail);
