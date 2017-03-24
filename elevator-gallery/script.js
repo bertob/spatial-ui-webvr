@@ -16,11 +16,11 @@ document.getElementById("right-hand").addEventListener("triggerup", function() {
 // });
 
 
-for (var i=0; i<list_length; i++) {
-  var card = document.createElement("a-entity");
-  card.setAttribute("card", "list_position: " + i);
-  document.getElementById("scene").appendChild(card);
-}
+// for (var i=0; i<list_length; i++) {
+//   var card = document.createElement("a-entity");
+//   card.setAttribute("card", "list_position: " + i);
+//   document.getElementById("scene").appendChild(card);
+// }
 
 // RING OF ITEMS
 var ring = {};
