@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Video</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../style.css" rel="stylesheet" type="text/css" />
+
+  <script src='../lib/jquery.min.js'></script>
+  <script src='../lib/aframe.min.js'></script>
+  <script src='../lib/aframe-extras.min.js'></script>
+  <!-- <script src='../lib/super-hands.min.js'></script> -->
+  <script src='../lib/aframe-auto-detect-controllers-component.min.js'></script>
+  <!-- <script src='../lib/aframe-alongpath-component.min.js'></script> -->
+  <script src='../lib/aframe-text-geometry-component.min.js'></script>
+  <!-- <script src='../lib/aframe-teleport-controls.min.js'></script> -->
+  <script src="components.js"></script>
+</head>
+
+<body>
+  <a-scene id="scene">
+
+    <a-assets id="assets">
+      <video id="bigbuckbunny" src="assets/bigbuckbunny.avi">
+      <img id="img1" src="../gallery/assets/1.png">
+      <img id="img2" src="../gallery/assets/2.png">
+      <img id="img3" src="../gallery/assets/3.png">
+      <img id="img4" src="../gallery/assets/4.png">
+      <img id="img5" src="../gallery/assets/5.png">
+      <img id="img6" src="../gallery/assets/6.png">
+    </a-assets>
+
+    <!-- <a-entity id="right-hand" vive-controls="hand: right"></a-entity> -->
+
+    <a-entity id="left-hand" auto-detect-controllers="hand:left"></a-entity>
+    <a-entity id="right-hand" auto-detect-controllers="hand:right"></a-entity>
+
+    <!-- <a-sky color="#1b2252" src="snow.jpg"></a-sky> -->
+
+    <a-cylinder rotation="0 0 0" radius="1.2" height="10" position="0 -5 0" opacity="0.9" roughness="0.9" color="#000"></a-cylinder>
+
+    <a-entity id="elevatable" elevatable position="0 0 0">
+
+      <a-sky color="#a298fd" src="../elevator-gallery/city-blue.jpg"></a-sky>
+
+      <!--  floor -->
+      <!-- <a-circle rotation="-90 0 0" radius="10" position="0 -10 0" color="#101432"></a-circle> -->
+
+      <!--  ceiling -->
+      <!-- <a-plane rotation="-270 0 0" width="10" height="10" position="0 3 0" repeat="10 10" color="#999f99"></a-plane> -->
+
+      <!--  walls -->
+      <!-- <a-box rotation="0 0 0" scale="10 100 0.1" position="0 0 -5" repeat="10 10" color="#bed"></a-box>
+      <a-box rotation="0 90 0" scale="10 100 0.1" position="5 0 0" repeat="10 10" color="#bed"></a-box>
+      <a-box rotation="0 90 0" scale="10 100 0.1" position="-5 0 0" repeat="10 10" color="#bed"></a-box> -->
+
+
+      <!-- lights -->
+      <a-light type="hemisphere" color="#dff" intensity="0.9" position="0 0.2 0" target="null"></a-light>
+      <a-light type="point" color="dff" decay="0.001" intensity="1.5" position="0 25 0"></a-light>
+    </a-entity>
+
+  </a-scene>
+
+  <script src="script.js"></script>
+</body>
+</html>

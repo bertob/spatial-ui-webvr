@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8">
-  <title>Aframe Experiment</title>
+  <title>Elevator Gallery</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="../style.css" rel="stylesheet" type="text/css" />
 
@@ -1155,12 +1155,14 @@
     <a-entity id="left-hand" auto-detect-controllers="hand:left"></a-entity>
     <a-entity id="right-hand" auto-detect-controllers="hand:right"></a-entity>
 
-    <a-sky color="#a298fd" src="city-blue.jpg"></a-sky>
     <!-- <a-sky color="#1b2252" src="snow.jpg"></a-sky> -->
 
     <a-cylinder rotation="0 0 0" radius="1.2" height="10" position="0 -5 0" opacity="0.9" roughness="0.9" color="#000"></a-cylinder>
 
     <a-entity id="elevatable" elevatable position="0 0 0">
+
+      <a-sky color="#a298fd" src="city-blue.jpg"></a-sky>
+
       <!--  floor -->
       <!-- <a-circle rotation="-90 0 0" radius="10" position="0 -10 0" color="#101432"></a-circle> -->
 

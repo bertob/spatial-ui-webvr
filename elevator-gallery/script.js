@@ -38,7 +38,6 @@ var ring_container = document.createElement("a-entity");
 var extra_y_space = 0;
 
 for (var i=0; i<ring.rows; i++) {
-
   if (i%6 === 0) {
     var month_title = document.createElement("a-entity");
     extra_y_space += ring.title_h;
