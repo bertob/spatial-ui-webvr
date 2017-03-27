@@ -26,6 +26,7 @@ ring.row_gap = 0.04;
 ring.angular_gap = 8; // degrees rotation
 
 ring.card_w = 0.18;
+ring.card_h = ring.card_w;
 ring.card_d = 0.003;
 ring.title_h = 0.2;
 
