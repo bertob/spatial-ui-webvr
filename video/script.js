@@ -23,29 +23,29 @@ ring.radius = 1.4;
 
 ring.row_gap = 0.04;
 ring.angular_gap = 8; // degrees rotation
-ring.vertical_gap = 0.02; // vertical shift
+ring.vertical_gap = 0.008; // vertical shift
 
 ring.card_w = 0.18;
 ring.card_h = ring.card_w * 9/16;
 ring.card_d = 0.003;
 
-var no_frames = 10*60; // 1 frame per second, 10 min
+var no_frames = 1193; //10*60; // 1 frame per second, 10 min
 
 // var img_counter = 1;
 var ring_container = document.createElement("a-entity");
 var extra_y_space = 0;
 
 
-for (var i=0; i < no_frames; i++) {
+for (var i=1; i <= no_frames; i++) {
 
   var a = i*ring.angular_gap;
-  var id = Math.floor(Math.random()*6) + 1;
+  // var id = Math.floor(Math.random()*6) + 1;
 
   var item = document.createElement("a-entity");
   item.setAttribute("geometry", "primitive: box; width:" + ring.card_w +
                        "; height:" + ring.card_w*3/4 + "; depth: " + ring.card_d + ";");
   item.setAttribute("rotation", {y: 90 - a});
-  item.setAttribute("material", "color: white; src: #img" + id);
+  item.setAttribute("material", "color: white; src: #img" + i);
   item.setAttribute("position", {x: ring.x + Math.cos(a*Math.PI/180) * ring.radius,
                                  y: ring.y + i * ring.vertical_gap,
                                  z: ring.z + Math.sin(a*Math.PI/180) * ring.radius});
