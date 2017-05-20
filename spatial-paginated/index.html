@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Spatial Paginated</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../style.css" rel="stylesheet" type="text/css" />
+
+  <script src='../lib/jquery.min.js'></script>
+  <script src='../lib/aframe.min.js'></script>
+  <script src='../lib/aframe-extras.min.js'></script>
+  <!-- <script src='../lib/aframe-physics-system.min.js'></script> -->
+  <!-- <script src='../lib/super-hands.min.js'></script> -->
+  <script src='../lib/aframe-auto-detect-controllers-component.min.js'></script>
+  <!-- <script src='../lib/aframe-alongpath-component.min.js'></script> -->
+  <script src='../lib/aframe-text-geometry-component.min.js'></script>
+  <script src='../lib/aframe-animation-component.min.js'></script>
+  <script src='../lib/aframe-controller-cursor-component.min.js'></script>
+  <!-- <script src='../lib/aframe-teleport-controls.min.js'></script> -->
+  <script src="components.js"></script>
+  <script>
+  </script>
+</head>
+
+<body>
+  <a-scene id="scene">
+
+    <a-assets>
+      <!-- <a-mixin id="card" geometry="primitive: sphere" material="color: white"></a-mixin> -->
+      <!-- <a-mixin id="card-hovered" material="opacity: 0.7; transparent: true"></a-mixin> -->
+      <!-- <img id="email-card" src="assets/card.png"> -->
+      <img id="img1" src="assets/1.png">
+      <img id="img2" src="assets/2.png">
+      <img id="img3" src="assets/3.png">
+      <img id="img4" src="assets/4.png">
+      <img id="img5" src="assets/5.png">
+      <img id="img6" src="assets/6.png">
+    </a-assets>
+
+    <!-- <a-entity id="right-hand" vive-controls="hand: right"></a-entity> -->
+
+    <a-entity id="left-hand" auto-detect-controllers="hand:left"></a-entity>
+    <a-entity id="right-hand" auto-detect-controllers="hand:right" controller-cursor></a-entity>
+
+    <a-sky color="#1b2252"></a-sky>
+
+    <!--  floor -->
+    <a-plane rotation="-90 0 0" width="3" height="3" position="0 0.005 0" repeat="10 10" color="#1b2252"></a-plane>
+    <a-plane rotation="-90 0 0" width="10" height="10" repeat="10 10" color="#101432"></a-plane>
+
+    <!--  ceiling -->
+    <!-- <a-plane rotation="-270 0 0" width="10" height="10" position="0 3 0" repeat="10 10" color="#999f99"></a-plane> -->
+
+    <!--  walls -->
+    <!-- <a-box rotation="0 0 0" scale="10 100 0.1" position="0 0 -5" repeat="10 10" color="#bed"></a-box>
+    <a-box rotation="0 90 0" scale="10 100 0.1" position="5 0 0" repeat="10 10" color="#bed"></a-box>
+    <a-box rotation="0 90 0" scale="10 100 0.1" position="-5 0 0" repeat="10 10" color="#bed"></a-box> -->
+
+
+    <!-- lights -->
+    <a-light type="hemisphere" color="#dff" intensity="0.9" position="0 0.2 0" target="null"></a-light>
+  </a-scene>
+
+  <script src="script.js"></script>
+</body>
+</html>
