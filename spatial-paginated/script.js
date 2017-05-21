@@ -64,6 +64,9 @@ for (var i=0; i<no_of_cards; i++) {
       y: grid.y - current_row * (c.height + c.y_gap + 0.02) * cards_per_page,
       z: grid.z
     });
+    page.setAttribute("data-x", grid.x + current_page * (c.width + c.x_gap));
+    page.setAttribute("data-y", grid.y - current_row * (c.height + c.y_gap + 0.02) * cards_per_page);
+    page.setAttribute("data-z", grid.z);
     addAnimation(page);
 
   }
@@ -79,7 +82,6 @@ for (var i=0; i<no_of_cards; i++) {
     z: 0
   });
 
-
   page.appendChild(card);
 
   current_card++;
@@ -88,23 +90,76 @@ for (var i=0; i<no_of_cards; i++) {
 
 function addAnimation(page) {
 
-  page.addEventListener("click", function(e) {
-    this.setAttribute("animation", {
+  page.setAttribute("data-open", "false");
+  // console.log("OPENNESS", page.dataset.open);
+
+  page.addEventListener("mouseenter", function(e) {
+    this.setAttribute("animation__hover", {
       "property": "scale",
       "dir": "alternate",
-      "dur": 400,
+      "dur": 200,
       "easing": "easeOutQuad",
       "loop": true,
-      "to": "7 7 1",
+      "to": "1.1 1.1 1",
     });
-    this.setAttribute("animation__move", {
-      "property": "position",
+  });
+
+  page.addEventListener("mouseleave", function(e) {
+    this.setAttribute("animation__hover", {
+      "property": "scale",
       "dir": "alternate",
-      "dur": 400,
+      "dur": 200,
       "easing": "easeOutQuad",
       "loop": true,
-      "to": "0.2 0.8 " + grid.z,
+      "to": "1 1 1",
     });
+  });
+
+
+  page.addEventListener("click", function(e) {
+    console.log("PAGE CLICKED");
+    if (this.dataset.open === "true") {
+      // close the open page
+      console.log("OPEN, CLOSING");
+      this.setAttribute("animation__scale", {
+        "property": "scale",
+        "dir": "alternate",
+        "dur": 400,
+        "easing": "easeOutQuad",
+        "loop": true,
+        "to": "1 1 1",
+      });
+      this.setAttribute("animation__move", {
+        "property": "position",
+        "dir": "alternate",
+        "dur": 400,
+        "easing": "easeOutQuad",
+        "loop": true,
+        "to": this.dataset.x + " " + this.dataset.y + " " + this.dataset.z,
+      });
+      page.setAttribute("data-open", "false");
+    }
+    else {
+      // open the closed page
+      console.log("NOT OPEN, OPENING");
+      this.setAttribute("animation__scale", {
+        "property": "scale",
+        "dir": "alternate",
+        "dur": 400,
+        "easing": "easeOutQuad",
+        "loop": true,
+        "to": "7 7 1",
+      });
+      this.setAttribute("animation__move", {
+        "property": "position",
+        "dir": "alternate",
+        "dur": 400,
+        "easing": "easeOutQuad",
+        "loop": true,
+        "to": "0.2 0.8 " + grid.z,
+      });
+      page.setAttribute("data-open", "true");
+    }
   })
 
 }
