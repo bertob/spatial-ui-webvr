@@ -27,12 +27,12 @@ AFRAME.registerComponent("card", {
     this.prev = {};
     this.moving = false;
     var x, y, z;
-    x = x_offset;
+    x = 0;
 
     var real_position = this.data.list_position - scroll_position;
 
-    y = y_offset + real_position * (card_h + y_gap);
-    z = z_offset;
+    y = real_position * (card_h + y_gap);
+    z = 0;
 
     var id = Math.floor(Math.random()*6) + 1;
     this.el.setAttribute("geometry", "primitive: box; width:" + card_w +
@@ -43,8 +43,11 @@ AFRAME.registerComponent("card", {
   },
   update: function () {},
   tick: function (time) {
-    if (this.el.getAttribute("position").y > 2 || this.el.getAttribute("position").y < 1)
-      this.el.setAttribute("material", "opacity: 0; transparent: true");
+    abs_y = this.el.getAttribute("position").y +
+            container.getAttribute("position").y;
+    // console.log(abs_y);
+    if (abs_y > 2 || abs_y < 1)
+      this.el.setAttribute("material", "opacity: 0.05; transparent: true");
     else
       this.el.setAttribute("material", "opacity: 1; transparent: false");
     // var now = {};
